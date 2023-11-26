@@ -1,15 +1,14 @@
-// Importing postgres database
-const pglib = require('pg')
+const cfg = require('./config/appconfig')
+const Router = require('./router')
+const DatabaseQuerier = require('./db')
 
-// Loading .env file
-require('dotenv').config()
+// Creating a database client
+const database = new DatabaseQuerier(cfg.db.connectionUrl)
 
-const client = new pglib.Client({ connectionString: process.env.DATABASE_URL })
- 
-client.connect((err) => {
-   client.query('SELECT $1::text as message', ['Hello world!'], (err, res) => {
-     console.log(err ? err.stack : res.rows[0].message) // Hello World!
-     client.end()
-   })
+// Running the router
+router = new Router({
+    port: cfg.app.port,
+    database: database
 })
- 
+
+router.run()
