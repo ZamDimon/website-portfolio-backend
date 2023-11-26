@@ -28,7 +28,24 @@ function notFoundError() {
     }
 }
 
+/**
+ * Function that generates a json response for a 400 error
+ * @param {any} errs: a list of errors
+ * @returns Generated json response
+ */
+function badRequestError(errs) {
+    return {
+        "title": "Bad Request",
+        "detail": "Some data in the request was invalid. Please refer to the service documentation.",
+        "status": 400,
+        "meta": {
+          "error": errs[0]['msg']
+        }
+    }
+}
+
 module.exports = {
     internalError,
-    notFoundError
+    notFoundError,
+    badRequestError
 }

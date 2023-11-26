@@ -11,6 +11,8 @@ const { logger } = require('../config/appconfig')
 // Loading handlers
 const bodyParser = require('body-parser')
 const handlers = require('./handlers')
+const validators = require('./validators')
+const { query } = require('express-validator')
 
 class Router {
     /**
@@ -32,7 +34,7 @@ class Router {
             .get(handlers.achievements.list(database.achievements()))
             
         app.route('/achievements/:id')
-            .get(handlers.achievements.get(database.achievements()))
+            .get(validators.achievements.get, handlers.achievements.get(database.achievements()))
     }
     
     /**
