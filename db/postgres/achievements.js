@@ -33,6 +33,10 @@ module.exports = class AchievementsQuerier extends IAchievementsQuerier {
         return result.rows.length == 0 ? null : result.rows[0]
     }
 
+    async delete(id) {
+        return this.query('delete from achievements where id = $1', [id])
+    }
+
     async insert(...achievements) {
         // Forming a query string
         var queryString = 'insert into achievements (name, url, year, subject, level, place, result) values '

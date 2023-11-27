@@ -20,7 +20,7 @@ function internalError() {
 function notFoundError() {
     return {
         "errors": [{
-            "title": "Not found error",
+            "title": "Not Found",
             "detail": "The requested resource could not be found.",
             "status": 404,
             "code": "not-found"

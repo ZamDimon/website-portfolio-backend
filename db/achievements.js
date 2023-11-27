@@ -18,6 +18,12 @@ module.exports = class IAchievementsQuerier {
     async list() {}
     
     /**
+     * Deletes an achievement from the database
+     * @param {int} id of the achievement to be deleted
+     */
+    delete(id) {}
+
+    /**
      * Inserts a list of achievements to the database
      * @param {list} List of achievements to be inserted
      * @returns {list} A list of inserted IDs
@@ -25,5 +31,4 @@ module.exports = class IAchievementsQuerier {
     async insert(...achievements) {}
 
     // update(id, achievement) {}
-    // delete(id) {}
 }

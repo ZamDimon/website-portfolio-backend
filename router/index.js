@@ -36,6 +36,7 @@ class Router {
             
         app.route('/achievements/:id')
             .get(validators.achievements.get, handlers.achievements.get(database.achievements()))
+            .delete(validators.achievements.delete, handlers.achievements.delete(database.achievements()))
     }
     
     /**
