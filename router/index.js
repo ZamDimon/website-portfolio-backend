@@ -32,7 +32,7 @@ class Router {
         })
         app.route('/achievements')
             .get(handlers.achievements.list(database.achievements()))
-            .post(validators.achievements.add, handlers.achievements.add(database.achievements()))
+            .post(...validators.achievements.add, handlers.achievements.add(database.achievements()))
             
         app.route('/achievements/:id')
             .get(validators.achievements.get, handlers.achievements.get(database.achievements()))
