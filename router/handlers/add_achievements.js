@@ -5,7 +5,7 @@ const { convertIDsToKeys } = require('../models/id')
 const { internalError, badRequestError } = require('../models/errors')
 const { logger } = require('../../config/appconfig')
 
-function getAchievement(achievementsQuerier) {
+function addAchievement(achievementsQuerier) {
     return async (request, response) => {
         // Checking if the request body is valid
         const validate = validationResult(request)
@@ -28,4 +28,4 @@ function getAchievement(achievementsQuerier) {
     }
 }
 
-module.exports = getAchievement
+module.exports = addAchievement

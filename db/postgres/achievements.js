@@ -54,4 +54,17 @@ module.exports = class AchievementsQuerier extends IAchievementsQuerier {
         const result = await this.query(queryString)
         return result.rows.map((row) => row.id)
     }
+
+    async update(id, newAchievement) {
+        // Forming a query string
+        var queryString = 'update achievements set '
+        const fields = Object.keys(newAchievement)
+        const fieldsStr = fields.map((field) => {
+            return `${field} = '${newAchievement[field]}'`
+        })
+        queryString += fieldsStr.join(', ') + ` where id = ${id}`
+
+        // Executing the query
+        return this.query(queryString)
+    }
 }
