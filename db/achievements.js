@@ -9,13 +9,21 @@ module.exports = class IAchievementsQuerier {
      * @returns {Object?} Achievement entry if one exists
      */
     async get(id) {}
+    
     /**
      * Returns a single achievement from the database
      * @param {int} ID of the achievement 
      * @returns {list} A list of achievements
      */
     async list() {}
-    // insert(achievements) {}
+    
+    /**
+     * Inserts a list of achievements to the database
+     * @param {list} List of achievements to be inserted
+     * @returns {list} A list of inserted IDs
+     */
+    async insert(...achievements) {}
+
     // update(id, achievement) {}
     // delete(id) {}
 }

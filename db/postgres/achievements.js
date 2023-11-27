@@ -32,4 +32,22 @@ module.exports = class AchievementsQuerier extends IAchievementsQuerier {
         const result = await this.query('select * from achievements where id = $1', [id])
         return result.rows.length == 0 ? null : result.rows[0]
     }
+
+    async insert(...achievements) {
+        // Forming a query string
+        var queryString = 'insert into achievements (name, url, year, subject, level, place, result) values '
+        const achievementsStr = achievements.map((achievement) => {
+            const {
+                name, url,
+                year, subject, level,
+                place, result
+            } = achievement
+            return `('${name}', '${url}', ${year}, '${subject}', ${level}, ${place}, '${result}')`
+        })
+        queryString += achievementsStr.join(', ') + ' returning id'
+
+        // Executing the query
+        const result = await this.query(queryString)
+        return result.rows.map((row) => row.id)
+    }
 }

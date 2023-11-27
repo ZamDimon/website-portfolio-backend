@@ -1,20 +1,15 @@
-const { convertAchievementToJSON } = require('../models/achievements')
-const { internalError, notFoundError } = require('../models/errors')
+const { convertAchievementsToData, ACHIEVEMENT_RESOURCE_KEY } = require('../models/achievements')
+const { convertIDsToKeys } = require('../models/id')
+const { internalError, badRequestError } = require('../models/errors')
 const { logger } = require('../../config/appconfig')
 
 function getAchievement(achievementsQuerier) {
     return async (request, response) => {
-        const id = parseInt(request.params.id)
-
-        achievementsQuerier.get(id).then((achievement) => {
-            if (achievement == null) {
-                response.status(404).json(notFoundError())
-                logger.warn(`Achievement with id ${id} not found`)
-                return
-            }
-            
-            logger.debug(`Achievement with id ${id} was successfully found`)
-            response.status(200).json(convertAchievementToJSON(achievement))
+        // Retrieving achievements from request body and 
+        // converting them to the database-compatible format
+        const achievements = convertAchievementsToData(request.body.data)
+        achievementsQuerier.insert(...achievements).then((ids) => {
+            response.status(200).json(convertIDsToKeys(ids, ACHIEVEMENT_RESOURCE_KEY))
         }).catch(err => {
             response.status(500).json(internalError())
             logger.error(err)

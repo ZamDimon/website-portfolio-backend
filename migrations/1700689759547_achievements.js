@@ -4,7 +4,7 @@ exports.shorthands = undefined;
 
 exports.up = (pgm) => {
     pgm.createTable('achievements', {
-        id: 'id',
+        id: { type: 'bigserial primary key', notNull: true },
         name: { type: 'text', notNull: true },
         url: { type: 'text', notNull: true },
         year: { type: 'integer', notNull: true },

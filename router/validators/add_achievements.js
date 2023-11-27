@@ -1,3 +1,3 @@
-const { query } = require('express-validator');
+const { body } = require('express-validator');
 
-module.exports = query('id').isInt({min: 1}).withMessage('id must be a positive integer')
+module.exports = body('data').notEmpty()
